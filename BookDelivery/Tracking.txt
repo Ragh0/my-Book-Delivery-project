@@ -1,0 +1,71 @@
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Tracking {
+    private String PhoneNumber;
+
+    public void setPhoneNumber(String PhoneNumber) {
+        this.PhoneNumber = PhoneNumber;
+    }
+
+    public String getPhoneNumber() {
+        return PhoneNumber;
+    }
+
+
+    public void displayTracking() throws IOException {
+        String phoneNumber;
+        file read = new file();
+        System.out.println("Tracking Page");
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter Your Phone Number To Tracking\n");
+        phoneNumber = validatePhoneNumber(scanner.nextLine());
+        System.out.println("This is your Shipment Information");
+        read.read(phoneNumber);
+
+
+    }
+    private String validatePhoneNumber(String phoneNumber) {
+        while (!phoneNumber.matches("\\d{10}")) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Invalid phone number. Please enter a 10-digit number.");
+            phoneNumber = scanner.nextLine();
+        }
+        return phoneNumber;
+    }
+
+    public static void main(String[] args) throws IOException {
+
+        Scanner input = new Scanner(System.in);
+        Tracking Tracking = new Tracking();
+        BookDelivery BookDelivery = new BookDelivery();
+        int a = 0;
+        while (a != 3) {
+            System.out.println("1- Shipment Book Delivery");
+            System.out.println("2- Shipment Tracking ");
+            System.out.println("3- exit");
+            System.out.print("please pick a number :");
+            a = input.nextInt();
+
+            switch (a) {
+                case 1:
+                    BookDelivery.displayBookDelivery();
+                    break;
+                case 2:
+                    Tracking.displayTracking();
+                    break;
+                case 3:
+                    System.out.println("thank you for using our app");
+                    break;
+                default:
+                    System.out.println("you only can enter 1 , 2 and 3");
+
+                    break;
+            }
+        }
+    }
+
+}
